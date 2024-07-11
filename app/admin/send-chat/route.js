@@ -6,7 +6,7 @@ const fresh = "yes"
 
 const sanitizeOptions = {
   allowedTags: [],
-  allowedAttributes: {}
+  allowedAttributes: {},
 }
 
 export async function POST(request) {
@@ -16,17 +16,17 @@ export async function POST(request) {
   if (cleanMessage) {
     const pusher = new Pusher({
       appId: process.env.PUSHERID,
-      key: process.env.PUSHERKEY,
+      key: process.env.NEXT_PUBLIC_PUSHERKEY,
       secret: process.env.PUSHERSECRET,
-      cluster: "us3",
-      useTLS: true
+      cluster: "eu",
+      useTLS: true,
     })
 
     await pusher.trigger(
       "private-petchat",
       "message",
       {
-        message: cleanMessage
+        message: cleanMessage,
       },
       { socket_id: incoming.socket_id }
     )
